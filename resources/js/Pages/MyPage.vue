@@ -6,8 +6,8 @@ import Available from '@/Pages/Section/Available.vue';
 import Strong from '@/Pages/Section/Strong.vue'
 import Record from '@/Pages/Section/Record.vue';
 
-import { Head } from '@inertiajs/inertia-vue3';
-import { Inertia } from '@inertiajs/inertia';
+import { Head } from '@inertiajs/vue3';
+import { router } from '@inertiajs/vue3';
 import { ref, reactive } from 'vue'
 
 
