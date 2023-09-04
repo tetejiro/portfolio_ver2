@@ -12,4 +12,9 @@ class MyPageController extends Controller
     {
         return Inertia::render('MyPage');
     }
+
+    public function store(Request $request)
+    {
+        dd($request);
+    }
 }

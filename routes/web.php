@@ -28,6 +28,7 @@ Route::middleware('auth')->group(function () {
 
 
 Route::get('/myPage', [MyPageController::class, 'index'])->middleware(['auth', 'verified'])->name('my_page');
+Route::post('/myPage', [MyPageController::class, 'store'])->middleware(['auth', 'verified'])->name('my_page');
 
 
 require __DIR__.'/auth.php';
