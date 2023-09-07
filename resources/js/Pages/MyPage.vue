@@ -6,8 +6,7 @@ import Available from '@/Pages/Section/Available.vue';
 import Strong from '@/Pages/Section/Strong.vue'
 import Record from '@/Pages/Section/Record.vue';
 
-import { Head } from '@inertiajs/vue3';
-import { router } from '@inertiajs/vue3';
+import { Head, router } from '@inertiajs/vue3';
 import { ref, reactive } from 'vue'
 
 
@@ -36,20 +35,20 @@ const toActive = (e, num) => {
 
 
 let form = reactive({
-    task_content: null,
-    task_start: null,
-    task_end: null,
-    busy: null,
-    available_start: null,
-    available_end: null,
-    caution: null,
-    strong_point_1: null,
-    strong_point_2: null,
-    strong_point_3: null
+    task_content: 'task_content',
+    task_start: '9/7 12:00',
+    task_end: '9/8 13:00',
+    busy: 3,
+    available_start: '13:00',
+    available_end: '14:00',
+    caution: 'caution',
+    strong_point_1: 'strong1',
+    strong_point_2: 'strong2',
+    strong_point_3: 'strong3'
 })
 
 let submit = () => {
-    Inertia.post(route('my_page'), form)
+    router.post(route('my_page'), form)
 }
 
 </script>
@@ -120,11 +119,21 @@ let submit = () => {
 
 
                                 <!-- タブの中身 -->
-                                <Task v-if="activeNum == 1" :form="form"></Task>
-                                <Schedule v-if="activeNum == 2"></Schedule>
-                                <Available v-if="activeNum == 3"></Available>
-                                <Strong v-if="activeNum == 4"></Strong>
-                                <Record v-if="activeNum == 5"></Record>
+                                <KeepAlive>
+                                    <Task v-if="activeNum == 1" :form="form"></Task>
+                                </KeepAlive>
+                                <KeepAlive>
+                                    <Schedule v-if="activeNum == 2" :form="form"></Schedule>
+                                </KeepAlive>
+                                <KeepAlive>
+                                    <Available v-if="activeNum == 3" :form="form"></Available>
+                                </KeepAlive>
+                                <KeepAlive>
+                                    <Strong v-if="activeNum == 4" :form="form"></Strong>
+                                </KeepAlive>
+                                <KeepAlive>
+                                    <Record v-if="activeNum == 5" :form="form"></Record>
+                                </KeepAlive>
                                 <!-- タブの中身 -->
 
 
