@@ -33,13 +33,12 @@ const toActive = (e, num) => {
     activeNum.value = num
 }
 
-
 let form = reactive({
     task_content: 'task_content',
     task_start: '9/7 12:00',
     task_end: '9/8 13:00',
     busy: 3,
-    available_start: '13:00',
+    available_start: null,
     available_end: '14:00',
     caution: 'caution',
     strong_point_1: 'strong1',
@@ -120,19 +119,19 @@ let submit = () => {
 
                                 <!-- タブの中身 -->
                                 <KeepAlive>
-                                    <Task v-if="activeNum == 1" :form="form"></Task>
+                                    <Task v-show="activeNum == 1" :form="form"></Task>
                                 </KeepAlive>
                                 <KeepAlive>
-                                    <Schedule v-if="activeNum == 2" :form="form"></Schedule>
+                                    <Schedule v-show="activeNum == 2" :form="form"></Schedule>
                                 </KeepAlive>
                                 <KeepAlive>
-                                    <Available v-if="activeNum == 3" :form="form"></Available>
+                                    <Available v-show="activeNum == 3" :form="form"></Available>
                                 </KeepAlive>
                                 <KeepAlive>
-                                    <Strong v-if="activeNum == 4" :form="form"></Strong>
+                                    <Strong v-show="activeNum == 4" :form="form"></Strong>
                                 </KeepAlive>
                                 <KeepAlive>
-                                    <Record v-if="activeNum == 5" :form="form"></Record>
+                                    <Record v-show="activeNum == 5" :form="form"></Record>
                                 </KeepAlive>
                                 <!-- タブの中身 -->
 

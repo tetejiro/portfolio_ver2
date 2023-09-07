@@ -3,26 +3,36 @@ import { Datetimepicker, Input, initTE } from "tw-elements";
 import { onMounted } from 'vue'
 
 
+let task_start;
+let task_end;
 onMounted(() => {
     initTE({ Datetimepicker, Input });
 
     const pickerTimeOptions_start = document.querySelector('#datetimepicker-timeOptions-start');
     const pickerTimeOptions_end = document.querySelector('#datetimepicker-timeOptions-end');
 
-    new Datetimepicker(
+    task_start = new Datetimepicker(
         pickerTimeOptions_start, {
             timepicker: { format24: true },
+            datepicker: { format: 'yyyy/mm/dd'}
         }
     );
 
-    new Datetimepicker(
+    task_end = new Datetimepicker(
         pickerTimeOptions_end, {
             timepicker: { format24: true },
+            datepicker: { format: 'yyyy/mm/dd'}
         }
     );
 });
 
 let props = defineProps(['form'])
+
+// TODO: 代入のトリガーを修正する。
+window.addEventListener('click', () => {
+    props.form.task_start = task_start._dateValue + ',' + task_start._timeValue
+    props.form.task_end = task_end._dateValue + ',' + task_end._timeValue
+})
 
 </script>
 

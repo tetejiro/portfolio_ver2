@@ -15,6 +15,8 @@ class MyPageController extends Controller
 
     public function store(Request $request)
     {
-        dd($request);
+        return Inertia::route('MyPage', [
+            'form' => $request
+        ]);
     }
 }
