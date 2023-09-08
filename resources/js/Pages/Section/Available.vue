@@ -56,7 +56,6 @@ onMounted(() => {
             >Select a time
           </label>
         </div>
-        <!-- <div class="my-2">Input value: <span id="span-input-value"></span></div> -->
 
         <div class="text-md font-medium mb-4 text-gray-900 mx-2">
           ～

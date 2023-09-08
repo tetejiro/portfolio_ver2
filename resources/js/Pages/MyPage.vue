@@ -37,7 +37,7 @@ let form = reactive({
     task_content: 'task_content',
     task_start: '9/7 12:00',
     task_end: '9/8 13:00',
-    busy: 3,
+    schedule_status: 3,
     available_start: null,
     available_end: '14:00',
     caution: 'caution',

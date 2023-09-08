@@ -30,8 +30,8 @@ let props = defineProps(['form'])
 
 // TODO: 代入のトリガーを修正する。
 window.addEventListener('click', () => {
-    props.form.task_start = task_start._dateValue + ',' + task_start._timeValue
-    props.form.task_end = task_end._dateValue + ',' + task_end._timeValue
+    props.form.task_start = task_start._dateValue + task_start._timeValue
+    props.form.task_end = task_end._dateValue + task_end._timeValue
 })
 
 </script>
