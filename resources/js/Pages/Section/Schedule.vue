@@ -1,9 +1,9 @@
 <script setup>
-let kao1 = 'kao/kao1.png'
-let kao2 = 'kao/kao2.png'
-let kao3 = 'kao/kao3.png'
-let kao4 = 'kao/kao4.png'
-let kao5 = 'kao/kao5.png'
+let kao1 = '/kao/kao1.png'
+let kao2 = '/kao/kao2.png'
+let kao3 = '/kao/kao3.png'
+let kao4 = '/kao/kao4.png'
+let kao5 = '/kao/kao5.png'
 
 let props = defineProps(['form'])
 
