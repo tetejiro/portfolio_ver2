@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('horenso_infos', function (Blueprint $table) {
-            $table->id('horenso_code');
-            $table->integer('member_code')->nullable(false)->comment('送り主');
-            $table->integer('target_member_code')->nullable(false)->comment('宛先');
+            $table->increments('id');
+            $table->integer('user_id')->nullable(false)->comment('送り主');
+            $table->integer('target_user_id')->nullable(false)->comment('宛先');
             $table->string('title')->nullable(false)->comment('件名');
             $table->string('request')->nullable(true)->comment('依頼内容');
             $table->string('detail')->nullable(true)->comment('詳細');

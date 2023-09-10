@@ -12,8 +12,8 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('mypage_infos', function (Blueprint $table) {
-            $table->id('mypage_code');
-            $table->integer('member_code')->nullable(false);
+            $table->increments('id');
+            $table->integer('user_id')->nullable(false);
             $table->string('task_content')->nullable(false);
             $table->dateTime('task_start')->nullable(false);
             $table->dateTime('task_end')->nullable(false);

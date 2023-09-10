@@ -15,8 +15,8 @@ class MypageInfoSeeder extends Seeder
     {
         MypageInfo::insert([
             [
-                'mypage_code' => 1,
-                'member_code' => 1,
+                'id' => 1,
+                'user_id' => 1,
                 'task_content' => '新規画面開発',
                 'task_start' => '2023/10/11 10:00',
                 'task_end' => '2023/10/21 10:00',
@@ -26,11 +26,12 @@ class MypageInfoSeeder extends Seeder
                 'caution' => '注意：よくリファレンスを読むように。',
                 'strong_point_1' => 'テストなら任せろ！',
                 'strong_point_2' => 'テストなら任せろ！',
-                'strong_point_3' => 'テストなら任せろ！'
+                'strong_point_3' => 'テストなら任せろ！',
+                'created_at' => '2023/9/9 11:00'
             ],
             [
-                'mypage_code' => 2,
-                'member_code' => 1,
+                'id' => 2,
+                'user_id' => 1,
                 'task_content' => 'テスト',
                 'task_start' => '2023/10/24 10:00',
                 'task_end' => '2023/10/25 10:00',
@@ -40,11 +41,12 @@ class MypageInfoSeeder extends Seeder
                 'caution' => '注意：「絶対に」リファレンスを読むように。',
                 'strong_point_1' => 'テストテストテストテスト',
                 'strong_point_2' => 'テストなら任せろ！',
-                'strong_point_3' => 'テストなら任せろ！'
+                'strong_point_3' => 'テストなら任せろ！',
+                'created_at' => '2023/9/9 12:00'
             ],
             [
-                'mypage_code' => 3,
-                'member_code' => 3,
+                'id' => 3,
+                'user_id' => 3,
                 'task_content' => 'テストテストテストテスト',
                 'task_start' => '2023/10/24 10:00',
                 'task_end' => '2023/10/25 10:00',
@@ -54,7 +56,8 @@ class MypageInfoSeeder extends Seeder
                 'caution' => '注意：「絶対に」リファレンスを読むように。',
                 'strong_point_1' => 'テストテストテストテスト',
                 'strong_point_2' => 'テストなら任せろ！',
-                'strong_point_3' => 'テストなら任せろ！'
+                'strong_point_3' => 'テストなら任せろ！',
+                'created_at' => '2023/9/9 14:00'
             ],
         ]);
     }

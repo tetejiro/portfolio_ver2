@@ -15,9 +15,9 @@ class HorensoInfoSeeder extends Seeder
     {
         HorensoInfo::insert([
             [
-                'horenso_code' => 1,
-                'member_code' => 1,
-                'target_member_code' => 2,
+                'id' => 1,
+                'user_id' => 1,
+                'target_user_id' => 2,
                 'title' => '報告・title',
                 'request' => null,
                 'detail' => '報告・detail',
@@ -27,9 +27,9 @@ class HorensoInfoSeeder extends Seeder
                 'created_at' => '2023/9/8 10:00'
             ],
             [
-                'horenso_code' => 2,
-                'member_code' => 1,
-                'target_member_code' => 3,
+                'id' => 2,
+                'user_id' => 1,
+                'target_user_id' => 3,
                 'title' => '質問・title',
                 'request' => '質問・request',
                 'detail' => '質問・detail',
@@ -39,9 +39,9 @@ class HorensoInfoSeeder extends Seeder
                 'created_at' => '2023/9/9 11:00'
             ],
             [
-                'horenso_code' => 3,
-                'member_code' => 2,
-                'target_member_code' => 3,
+                'id' => 3,
+                'user_id' => 2,
+                'target_user_id' => 3,
                 'title' => '報告・title',
                 'request' => null,
                 'detail' => '報告・detail',
@@ -51,9 +51,9 @@ class HorensoInfoSeeder extends Seeder
                 'created_at' => '2023/9/8 10:00'
             ],
             [
-                'horenso_code' => 4,
-                'member_code' => 2,
-                'target_member_code' => 3,
+                'id' => 4,
+                'user_id' => 2,
+                'target_user_id' => 3,
                 'title' => '質問・title',
                 'request' => '質問・request',
                 'detail' => '質問・detail',
