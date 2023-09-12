@@ -11,6 +11,7 @@ class HorensoInfo extends Model
 
     protected $fillable = [
         'id', 'user_id', 'target_user_id', 'title',
-        'request', 'cause', 'detail', 'other', 'rsvp'
+        'is_question', 'request', 'cause', 'detail',
+        'other', 'rsvp'
     ];
 }

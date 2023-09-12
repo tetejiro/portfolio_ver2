@@ -10,7 +10,7 @@ class MypageInfo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'mypage_code', 'member_code',
+        'user_id', 'mypage_code', 'member_code',
         'task_content', 'task_start',
         'task_end', 'schedule_status',
         'available_start', 'available_end',
