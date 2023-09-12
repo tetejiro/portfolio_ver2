@@ -10,11 +10,7 @@ class HorensoInfo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'horenso_code',
-        'member_code',
-        'target_member_code',
-        'title',
-        'detail',
-        'other'
+        'id', 'user_id', 'target_user_id', 'title',
+        'request', 'cause', 'detail', 'other', 'rsvp'
     ];
 }

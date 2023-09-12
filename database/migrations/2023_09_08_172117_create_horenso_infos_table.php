@@ -15,6 +15,7 @@ return new class extends Migration
             $table->increments('id');
             $table->integer('user_id')->nullable(false)->comment('送り主');
             $table->integer('target_user_id')->nullable(false)->comment('宛先');
+            $table->boolean('is_question')->nullable(false)->comment('質問=>true, 報告=>false');
             $table->string('title')->nullable(false)->comment('件名');
             $table->string('request')->nullable(true)->comment('依頼内容');
             $table->string('detail')->nullable(true)->comment('詳細');
