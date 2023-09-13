@@ -18,21 +18,33 @@ onMounted(() => {
         }
     );
 
+    // 初期値に既存データを代入
+    task_start._dateValue = props.form.task_start == null ? null : props.form.task_start.slice(0, 10)
+    task_start._timeValue = props.form.task_start == null ? null : props.form.task_start.slice(11)
+
     task_end = new Datetimepicker(
         pickerTimeOptions_end, {
             timepicker: { format24: true },
             datepicker: { format: 'yyyy/mm/dd'}
         }
     );
+
+    // 初期値に既存データを代入
+    task_end._dateValue = props.form.task_end == null ? null : props.form.task_end.slice(0, 10)
+    task_end._timeValue = props.form.task_end == null ? null : props.form.task_end.slice(11)
+
 });
 
 let props = defineProps(['form'])
 
 // TODO: 代入のトリガーを修正する。
 window.addEventListener('click', () => {
-    props.form.task_start = task_start._dateValue + task_start._timeValue
-    props.form.task_end = task_end._dateValue + task_end._timeValue
+    props.form.task_start = task_start._dateValue + ' ' + task_start._timeValue
+    props.form.task_end = task_end._dateValue + ' ' + task_end._timeValue
 })
+
+
+// TODO: 完了フラグ項目を追加する（周辺の項目についても検討する）
 
 </script>
 

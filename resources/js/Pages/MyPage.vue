@@ -6,10 +6,14 @@ import Available from '@/Pages/Section/Available.vue';
 import Strong from '@/Pages/Section/Strong.vue'
 import Record from '@/Pages/Section/Record.vue';
 
-import { Head, router } from '@inertiajs/vue3';
+import { Head, router, Link } from '@inertiajs/vue3';
+// TODO: shallowRef で書き換えた方がいいかも https://play.vuejs.org/#eNqtU01v1DAQ/SuWL1u0ZYPUW5RGbKoeAPGhwtGXNJlN3Tq25Y+wKMp/Z2xn091CqUDc4pnn5/fmTUa61XozeKA5LWxjuHbEgvO6ZJL3WhlHRmLvaiHU9xvYkYnsjOrJCm+sFsSV6vV2bmyyeAqUp4DqBFDNACYbJa0jjTcGpCOXR4+dRaZXTBZZUoaa8OCg16J2gCdCipYPpBG1tZeMttArRmMdO6K+BVEWXGrviPuhARGmbjlCyPC6Vy0IrMwPYy0fauEDKD6Lhawk2yJLNP+Ds0qc1RPODwB6K/iQDMVSg2glwzxyHowthGWRLb3D/eyUoMhwJPhVZEeDoufJ1UtJm18iXgJSPsaDiLM3L2Siy6s5zkVsHkYZnsK21bUsI19OxnFmniZkDI0IufXOKUneNoI3D2EAAbNe4wDWRZaaz1iMi/V3FpPB3nazvdXqX/xhrMf+PoK1dQeE22gysJ9aTDv0uDSIiLv71JSzqG/Hu829VRKNjeF2mEivuQDzWTuO+hnFZ9JCMBp/oPex5oyH80O9uYPm4Tf1e7sPNUa/GLBgBmB06bnadICbF9rXXz/BHr+XJmr3AtF/aN6AVcIHjQlWedmi7CNcVPsuxsNl981e7x1IezAVhAbkFPGMYmQh5uesP8q92FzEe0xOdPoJPnunKA==
 import { ref, reactive } from 'vue'
 
 
+/**
+ * タブメニューのアクティブ・非アクティブの切り替え
+ */
 let activeNum = ref(1)
 let actives = [
     "sm:px-6", "py-3", "w-1/2", "sm:w-auto", "justify-center", "sm:justify-start","border-b-2",
@@ -33,21 +37,29 @@ const toActive = (e, num) => {
     activeNum.value = num
 }
 
+
+/**
+ * データ管理・フォーム送信
+ */
+let props = defineProps(['user', 'rec'])
+let latest_rec = props.rec != null ? props.rec[props.rec.length-1] : null
+
 let form = reactive({
-    task_content: 'task_content',
-    task_start: '9/7 12:00',
-    task_end: '9/8 13:00',
-    schedule_status: 3,
-    available_start: null,
-    available_end: '14:00',
-    caution: 'caution',
-    strong_point_1: 'strong1',
-    strong_point_2: 'strong2',
-    strong_point_3: 'strong3'
+    user_id: props.user.id,
+    task_content: latest_rec == null ? null : latest_rec.task_content,
+    task_start: latest_rec == null ? null : latest_rec.task_start.slice(0, -3),
+    task_end: latest_rec == null ? null : latest_rec.task_end.slice(0, -3),
+    schedule_status: latest_rec == null ? null : latest_rec.schedule_status,
+    available_start: latest_rec == null ? null : latest_rec.available_start,
+    available_end: latest_rec == null ? null : latest_rec.available_end,
+    caution: latest_rec == null ? null : latest_rec.caution,
+    strong_point_1: latest_rec == null ? null : latest_rec.strong_point_1,
+    strong_point_2: latest_rec == null ? null : latest_rec.strong_point_2,
+    strong_point_3: latest_rec == null ? null : latest_rec.strong_point_3
 })
 
 let submit = () => {
-    router.post(route('my_page'), form)
+    router.post(route('post_my_page'), form)
 }
 
 </script>
@@ -63,12 +75,14 @@ let submit = () => {
                 <header class="text-gray-600 body-font">
                     <div class="container mx-auto flex flex-wrap flex-col md:flex-row items-center">
                         <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-                        <h2 class="font-semibold text-xl text-gray-800 leading-tight">MyPage</h2>
+                        <h2 v-if="$page.props.auth.user.id == props.user.id" class="font-semibold text-xl text-gray-800 leading-tight">MyPage</h2>
+                        <h2 v-else>{{ props.user.name }} さんのページ</h2>
                         </a>
                         <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-                        <button class="mr-5 hover:text-gray-900">更新</button>
-                        <div class="mr-5 hover:text-gray-900">質問リスト</div>
-                        <div class="mr-5 hover:text-gray-900">メンバーリスト</div>
+                            <div v-if="$page.props.auth.user.id == props.user.id" class="flex mr-5 hover:text-gray-900">
+                                <button class="cursor-grabbing mr-5">更新</button>
+                            </div>
+                            <div v-else><Link :href="route('horenso', { id: props.user.id })">報連相する</Link></div>
                         </nav>
                     </div>
                 </header>
@@ -81,6 +95,9 @@ let submit = () => {
             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                 <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900">
+                        <div v-if="$page.props.flash.message" class="text-center bg-emerald-200 w-5/12 mx-auto py-1 rounded-md">
+                            {{ $page.props.flash.message }}
+                        </div>
                         <section class="text-gray-600 body-font">
                             <div class="container px-5 py-3 mx-auto flex flex-wrap flex-col">
 
@@ -131,7 +148,7 @@ let submit = () => {
                                     <Strong v-show="activeNum == 4" :form="form"></Strong>
                                 </KeepAlive>
                                 <KeepAlive>
-                                    <Record v-show="activeNum == 5" :form="form"></Record>
+                                    <Record v-show="activeNum == 5" :rec="props.rec"></Record>
                                 </KeepAlive>
                                 <!-- タブの中身 -->
 
