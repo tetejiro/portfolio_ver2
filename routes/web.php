@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MyPageController;
+use App\Http\Controllers\NoticeInfoController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -16,9 +17,7 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [NoticeInfoController::class, 'index'])->middleware(['auth', 'verified', 'noticeInfo'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -27,8 +26,10 @@ Route::middleware('auth')->group(function () {
 });
 
 
-Route::get('/myPage', [MyPageController::class, 'index'])->middleware(['auth', 'verified'])->name('my_page');
-Route::post('/myPage', [MyPageController::class, 'store'])->middleware(['auth', 'verified'])->name('my_page');
-
+Route::get('/myPage/{id?}', [MyPageController::class, 'index'])->middleware(['auth', 'verified'])->name('my_page');
+Route::post('/myPage', [MyPageController::class, 'store'])->middleware(['auth', 'verified'])->name('post_my_page');
+Route::get('/member_list', [MyPageController::class, 'member_list'])->middleware(['auth', 'verified'])->name('member_list');
+Route::get('/horenso/{id}', [MyPageController::class, 'horenso'])->middleware(['auth', 'verified'])->name('horenso');
+Route::post('/sendMail', [MyPageController::class, 'sendMail'])->middleware(['auth', 'verified'])->name('sendMail');
 
 require __DIR__.'/auth.php';
