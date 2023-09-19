@@ -9,14 +9,14 @@ function calcTimeGap(start, end) {
   let days = 0
   let hours = 0
   let mins = 0
-  if(timeGap / 1000 / 60 / 60 % 24 == 0) {
-    days = timeGap / 1000 / 60 / 60 / 24
+  if(timeGap / 1000 / 60 / 60 / 24 > 0) {
+    days = Math.floor(timeGap / 1000 / 60 / 60 / 24)
   }
-  if(timeGap / 1000 / 60 % 60) {
-    hours = timeGap / 1000 / 60 / 60
+  if(timeGap / 1000 / 60 / 60 > 0) {
+    hours = Math.floor((timeGap - (days * (1000 * 60 * 60 * 24))) / 1000 / 60 / 60)
   }
-  if(timeGap / 1000 % 60) {
-    mins = timeGap / 1000 / 60
+  if(timeGap / 1000 % 60 > 0) {
+    mins = (timeGap - ((days * (1000 * 60 * 60 * 24)) + (hours * 1000 * 60 * 60))) / 1000 / 60
   }
   return days + ' 日 ' + hours + ' 時間 ' + mins + ' 分'
 }
@@ -36,11 +36,11 @@ function calcTimeGap(start, end) {
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">内容</th>
             <td class="px-4 py-3 border-solid border-solid border">{{ rec.task_content }}</td>
           </tr>
-          <tr>
+          <tr v-if="rec.task_start != null">
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">開始時間</th>
             <td class="px-4 py-3 border-solid border-solid border">{{ dayjs(rec.task_start).format('YYYY-MM-DD HH:MM') }}</td>
           </tr>
-          <tr>
+          <tr v-if="rec.task_end != null">
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">終了時間</th>
             <td class="px-4 py-3 border-solid border-solid border">{{ dayjs(rec.task_end).format('YYYY-MM-DD HH:MM') }}</td>
           </tr>
