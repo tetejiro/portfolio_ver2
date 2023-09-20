@@ -2,7 +2,7 @@
 import dayjs from 'dayjs'
 
 let props = defineProps(['rec'])
-let recs = props.rec
+let recs = props.rec.reverse() // 最新のレコードが上
 
 function calcTimeGap(start, end) {
   let timeGap = new Date(end) - new Date(start)
@@ -26,7 +26,6 @@ function calcTimeGap(start, end) {
   <div class="w-3/5 mx-auto overflow-auto">
       <p class="text-center font-medium text-gray-900 mx-auto mt-10 mb-4">おしごと記録</p>
 
-      <!-- TODO: 降順に並べ替え -->
       <table v-for="rec in recs" :key="rec.id" class="mb-3 table-auto w-full text-left whitespace-no-wrap">
           <tr>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl">記録時間</th>
@@ -57,5 +56,6 @@ function calcTimeGap(start, end) {
             <td class="px-4 py-3 border border-solid" v-if="rec.schedule_status == 5">ゆとりがある</td>
           </tr>
       </table>
+
   </div>
 </template>

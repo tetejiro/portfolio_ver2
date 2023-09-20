@@ -3,9 +3,7 @@ import { Link, router } from '@inertiajs/vue3'
 import dayjs from 'dayjs'
 
 let props = defineProps(['rec', 'myId', 'authUser'])
-let recs = props.rec
-
-console.log(props.myId + '?' + props.authUser)
+let recs = props.rec.reverse() // 最新のレコードが上
 
 function calcTimeGap(start, end) {
   let timeGap = new Date(end) - new Date(start)
@@ -34,7 +32,6 @@ let toDeleteAction = id => {
   <div class="w-3/5 mx-auto overflow-auto">
       <p class="text-center font-medium text-gray-900 mx-auto mt-10 mb-4">おしごと記録</p>
 
-      <!-- TODO: 降順に並べ替え -->
       <table v-for="rec in recs" :key="rec.id" class="mb-3 table-auto w-full text-left whitespace-no-wrap">
           <tr>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl">記録時間</th>
