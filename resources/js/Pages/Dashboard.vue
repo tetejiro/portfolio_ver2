@@ -13,6 +13,7 @@ let form = reactive({
 
 let submit = () => {
     router.post(route('dashboard.store'), form);
+    form.content = null
 }
 
 </script>
