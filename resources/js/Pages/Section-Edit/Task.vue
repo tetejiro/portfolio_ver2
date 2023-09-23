@@ -20,7 +20,7 @@ let currentPage = location.pathname.slice(0, 14) == '/MyPage/create' ? 'create' 
 onMounted(() => {
     if(start_flg.flg) {
         let today = new Date();
-        props.form.task_start = today.getFullYear() + '-' + today.getMonth() + '-' + today.getDate() + ' ' + ('0' + today.getHours()).slice(-2) + ':' + ('0' + today.getMinutes()).slice(-2)
+        props.form.task_start = today.getFullYear() + '-' + (today.getMonth()+1) + '-' + today.getDate() + ' ' + ('0' + today.getHours()).slice(-2) + ':' + ('0' + today.getMinutes()).slice(-2)
     }
 })
 // =====================================================

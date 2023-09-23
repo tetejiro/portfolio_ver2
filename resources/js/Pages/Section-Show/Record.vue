@@ -3,7 +3,8 @@ import { Link, router } from '@inertiajs/vue3'
 import dayjs from 'dayjs'
 
 let props = defineProps(['rec', 'myId', 'authUser'])
-let recs = props.rec.reverse() // 最新のレコードが上
+
+let update_props = defineEmits(['updateRec'])
 
 function calcTimeGap(start, end) {
   let timeGap = new Date(end) - new Date(start)
@@ -22,7 +23,7 @@ function calcTimeGap(start, end) {
   return days + ' 日 ' + hours + ' 時間 ' + mins + ' 分'
 }
 
-let toDeleteAction = id => {
+let toDeleteAction = (id) => {
   router.delete(route('MyPage.destroy', id))
 }
 
@@ -32,10 +33,13 @@ let toDeleteAction = id => {
   <div class="w-3/5 mx-auto overflow-auto">
       <p class="text-center font-medium text-gray-900 mx-auto mt-10 mb-4">おしごと記録</p>
 
-      <table v-for="rec in recs" :key="rec.id" class="mb-3 table-auto w-full text-left whitespace-no-wrap">
+      <table v-for="rec in props.rec" :key="rec.id" class="mb-3 table-auto w-full text-left whitespace-no-wrap">
+          {{ rec.id }}
           <tr>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl">記録時間</th>
-            <td class="px-4 py-3 border-solid border">{{ dayjs(rec.created_at).format('YYYY-MM-DD HH:MM') }}</td>
+            <td class="px-4 py-3 border-solid border">
+              {{ dayjs(rec.created_at).format('YYYY-MM-DD') + ' ' + dayjs(rec.created_at).hour() + ':' + ('0' + dayjs(rec.created_at).minute()).slice(-2) }}
+            </td>
           </tr>
           <tr>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">内容</th>
@@ -43,11 +47,15 @@ let toDeleteAction = id => {
           </tr>
           <tr>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">開始時間</th>
-            <td class="px-4 py-3 border-solid border">{{ dayjs(rec.task_start).format('YYYY-MM-DD HH:MM') }}</td>
+            <td class="px-4 py-3 border-solid border">
+              {{ dayjs(rec.task_start).format('YYYY-MM-DD') + ' ' + dayjs(rec.task_start).hour() + ':' + ('0' + dayjs(rec.task_start).minute()).slice(-2) }}
+            </td>
           </tr>
           <tr>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">終了時間</th>
-            <td v-if="rec.task_end != null" class="px-4 py-3 border-solid border">{{ dayjs(rec.task_end).format('YYYY-MM-DD HH:MM') }}</td>
+            <td v-if="rec.task_end != null" class="px-4 py-3 border-solid border">
+              {{ dayjs(rec.task_end).format('YYYY-MM-DD') + ' ' + dayjs(rec.task_end).hour() + ':' + ('0' + dayjs(rec.task_end).minute()).slice(-2) }}
+            </td>
             <td v-else class="px-4 py-3 border-solid border">未完了</td>
           </tr>
           <tr v-if="rec.task_end != null">

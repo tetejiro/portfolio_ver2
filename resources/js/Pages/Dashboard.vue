@@ -47,7 +47,9 @@ let submit = () => {
                                     <ul>
                                         <div v-for="(notice, idx) in props.notices" :key="idx" class="py-2">
                                             <li>{{ notice.content }}</li>
-                                            <div>{{ dayjs(notice.created_at).format('YYYY-MM-DD HH:MM') }}</div>
+                                            <div>
+                                                {{ dayjs(notice.created_at).format('YYYY-MM-DD') + ' ' + dayjs(notice.created_at).hour() + ':' + ('0' + dayjs(notice.created_at).minute()).slice(-2) }}
+                                            </div>
                                         </div>
                                     </ul>
                                 </div>
