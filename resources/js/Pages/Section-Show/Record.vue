@@ -15,10 +15,10 @@ function calcTimeGap(start, end) {
     days = Math.floor(timeGap / 1000 / 60 / 60 / 24)
   }
   if(timeGap / 1000 / 60 / 60 > 0) {
-    hours = Math.floor((timeGap - (days * (1000 * 60 * 60 * 24))) / 1000 / 60 / 60)
+    hours = Math.floor((timeGap - (days * 86400000)) / 1000 / 60 / 60)
   }
-  if(timeGap / 1000 % 60 > 0) {
-    mins = (timeGap - ((days * (1000 * 60 * 60 * 24)) + (hours * 1000 * 60 * 60))) / 1000 / 60
+  if(timeGap / 1000 > 60 > 0) {
+    mins = (timeGap - ((days * 86400000) + (hours * 3600000))) / 1000 / 60
   }
   return days + ' 日 ' + hours + ' 時間 ' + mins + ' 分'
 }
@@ -34,7 +34,6 @@ let toDeleteAction = (id) => {
       <p class="text-center font-medium text-gray-900 mx-auto mt-10 mb-4">おしごと記録</p>
 
       <table v-for="rec in props.rec" :key="rec.id" class="mb-3 table-auto w-full text-left whitespace-no-wrap">
-          {{ rec.id }}
           <tr>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl">記録時間</th>
             <td class="px-4 py-3 border-solid border">
@@ -48,13 +47,13 @@ let toDeleteAction = (id) => {
           <tr>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">開始時間</th>
             <td class="px-4 py-3 border-solid border">
-              {{ dayjs(rec.task_start).format('YYYY-MM-DD') + ' ' + dayjs(rec.task_start).hour() + ':' + ('0' + dayjs(rec.task_start).minute()).slice(-2) }}
+              {{ rec.task_start }}
             </td>
           </tr>
           <tr>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">終了時間</th>
             <td v-if="rec.task_end != null" class="px-4 py-3 border-solid border">
-              {{ dayjs(rec.task_end).format('YYYY-MM-DD') + ' ' + dayjs(rec.task_end).hour() + ':' + ('0' + dayjs(rec.task_end).minute()).slice(-2) }}
+              {{ rec.task_end }}
             </td>
             <td v-else class="px-4 py-3 border-solid border">未完了</td>
           </tr>
@@ -64,15 +63,15 @@ let toDeleteAction = (id) => {
           </tr>
           <tr>
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-bl">当時の気分</th>
-            <td class="px-4 py-3 border border-solid" v-if="rec.schedule_status == 1">手伝ってほしい</td>
-            <td class="px-4 py-3 border border-solid" v-if="rec.schedule_status == 2">いそがしい</td>
-            <td class="px-4 py-3 border border-solid" v-if="rec.schedule_status == 3">よゆうがない</td>
-            <td class="px-4 py-3 border border-solid" v-if="rec.schedule_status == 4">ふつう</td>
-            <td class="px-4 py-3 border border-solid" v-if="rec.schedule_status == 5">ゆとりがある</td>
+            <td class="px-4 py-3 border-solid border" v-if="rec.schedule_status == 1">手伝ってほしい</td>
+            <td class="px-4 py-3 border-solid border" v-if="rec.schedule_status == 2">いそがしい</td>
+            <td class="px-4 py-3 border-solid border" v-if="rec.schedule_status == 3">よゆうがない</td>
+            <td class="px-4 py-3 border-solid border" v-if="rec.schedule_status == 4">ふつう</td>
+            <td class="px-4 py-3 border-solid border" v-if="rec.schedule_status == 5">ゆとりがある</td>
           </tr>
           <tr v-if="props.myId == props.authUser">
             <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-bl"></th>
-            <td class="px-4 py-3 border border-solid flex">
+            <td class="px-4 py-3 border-solid border flex">
               <!-- 修正ボタン -->
               <Link
                 :href="route('MyPage.edit', { id: rec.id })"
