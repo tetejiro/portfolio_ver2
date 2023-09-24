@@ -32,8 +32,11 @@ const showingNavigationDropdown = ref(false);
                                 <NavLink :href="route('dashboard.index')" :active="route().current('dashboard.index')">
                                     Announce
                                 </NavLink>
-                                <NavLink :href="route('my_page')" :active="route().current('my_page')">
+                                <NavLink :href="route('MyPage.index')" :active="route().current('MyPage.index') || route().current('MyPage.show') || route().current('MyPage.create')">
                                     MyPage
+                                </NavLink>
+                                <NavLink :href="route('history')" :active="route().current('history')">
+                                    History
                                 </NavLink>
                                 <NavLink :href="route('member_list')" :active="route().current('member_list')">
                                     Members
@@ -70,9 +73,9 @@ const showingNavigationDropdown = ref(false);
                                     </template>
 
                                     <template #content>
-                                        <DropdownLink :href="route('profile.edit')"> Profile </DropdownLink>
+                                        <DropdownLink :href="route('profile.edit')"> プロファイル </DropdownLink>
                                         <DropdownLink :href="route('logout')" method="post" as="button">
-                                            Log Out
+                                            ログアウト
                                         </DropdownLink>
                                     </template>
                                 </Dropdown>
@@ -121,8 +124,11 @@ const showingNavigationDropdown = ref(false);
                         <ResponsiveNavLink :href="route('dashboard.index')" :active="route().current('dashboard.index')">
                             Announce
                         </ResponsiveNavLink>
-                        <ResponsiveNavLink :href="route('my_page')" :active="route().current('my_page')">
+                        <ResponsiveNavLink :href="route('MyPage.index')" :active="route().current('MyPage.index')">
                             MyPage
+                        </ResponsiveNavLink>
+                        <ResponsiveNavLink :href="route('history')" :active="route().current('history')">
+                            History
                         </ResponsiveNavLink>
                         <ResponsiveNavLink :href="route('member_list')" :active="route().current('member_list')">
                             Members
