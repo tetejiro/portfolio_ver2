@@ -1,5 +1,5 @@
 <script setup>
-    let icon = 'favicon.ico'
+    let icon = '/favicon.ico'
 </script>
 
 <template>
