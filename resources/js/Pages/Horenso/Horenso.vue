@@ -1,14 +1,13 @@
 <script setup>
 import AuthenticatedLayout from '@/Layouts/AuthenticatedLayout.vue';
-import Question from '@/Pages/Question.vue'
-import Report from '@/Pages/Report.vue'
+import Question from '@/Pages/Horenso/Question.vue'
+import Report from '@/Pages/Horenso/Report.vue'
 
 import { shallowRef } from 'vue';
 
-let props = defineProps(['id'])
+let props = defineProps(['id', 'errors'])
 
 let current = shallowRef(Question)
-
 
 </script>
 
@@ -23,9 +22,6 @@ let current = shallowRef(Question)
             <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
               <h2 class="font-semibold text-xl text-gray-800 leading-tight">報連相</h2>
             </a>
-            <!-- <nav class="md:ml-auto flex flex-wrap items-center text-base justify-center">
-              <div>送信する</div>
-            </nav> -->
           </div>
         </header>
       </form>
@@ -46,7 +42,7 @@ let current = shallowRef(Question)
                 <label><input type="radio" name="type" v-model="current" :value="Question" class="mr-2">質問</label>
                 <label><input type="radio" name="type" v-model="current" :value="Report" class="mr-2 ml-2">報告</label>
 
-                <component :is="current" :id="props.id"></component>
+                <component :is="current" :id="props.id" :errors="props.errors"></component>
                 <!-- 中身 -->
 
 
