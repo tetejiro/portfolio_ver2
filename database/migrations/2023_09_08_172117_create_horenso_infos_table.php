@@ -17,11 +17,11 @@ return new class extends Migration
             $table->integer('target_user_id')->nullable(false)->comment('宛先');
             $table->boolean('is_question')->nullable(false)->comment('質問=>true, 報告=>false');
             $table->string('title')->nullable(false)->comment('件名');
-            $table->string('request')->nullable(true)->comment('依頼内容');
-            $table->string('detail')->nullable(true)->comment('詳細');
-            $table->string('cause')->nullable(true)->comment('原因');
-            $table->string('other')->nullable(true)->comment('その他');
-            $table->boolean('rsvp')->nullable(true)->comment('要返信');
+            $table->string('request_for')->nullable()->comment('依頼内容');
+            $table->string('detail')->nullable()->comment('詳細');
+            $table->string('cause')->nullable()->comment('原因');
+            $table->string('other')->nullable()->comment('その他');
+            $table->boolean('rsvp')->nullable()->comment('要返信');
             $table->timestamps();
         });
     }

@@ -64,6 +64,13 @@ class UserSeeder extends Seeder
                 'password' => Hash::make('test1'),
                 'email_verified_at' => date('Y-m-d H:i:s')
             ],
+            [
+                'year' => 6,
+                'name' => '東由樹',
+                'email' => 'hy1733505@gmail.com',
+                'password' => Hash::make('yuki'),
+                'email_verified_at' => date('Y-m-d H:i:s')
+            ],
         ]);
     }
 }
