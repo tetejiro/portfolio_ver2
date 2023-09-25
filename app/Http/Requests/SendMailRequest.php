@@ -22,7 +22,12 @@ class SendMailRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'title' => 'required'
+            'title' => ['required', 'string', 'max:255'],
+            'request_for' => ['required_if:is_question,true'],
+            'detail' => ['required', 'string', 'max:255'],
+            'cause' => ['string', 'max:255', 'nullable'],
+            'other' => ['string', 'max:255', 'nullable'],
+            'rsvp' => ['required_if:is_question,false','boolean']
         ];
     }
 }

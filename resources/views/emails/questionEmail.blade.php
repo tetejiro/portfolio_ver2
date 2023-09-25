@@ -101,7 +101,7 @@
                             </svg>
                         </div>
                         <h2>依頼したいこと</h2>
-                        <p>{{ $request->requests }}</p>
+                        <p>{{ $request->request_for }}</p>
                     </div>
                 </div>
                 <div class="border">
