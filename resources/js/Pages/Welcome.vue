@@ -56,7 +56,7 @@ defineProps({
 
 
             <!-- ここから -->
-            <div class="flex w-full justify-center">
+            <div class="flex w-full justify-evenly">
                 <Register class="w-1/3 p-3"></Register>
                 <login class="w-1/3 p-3"></login>
             </div>
