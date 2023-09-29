@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\NoticeInfoRequest;
 use App\Models\Notice;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -24,17 +23,17 @@ class NoticeInfoController extends Controller
     public function index(Request $request)
     {
         \Log::debug('index');
+
         $notices = $request->notices;
         $notices = array_reverse($notices->toArray());
 
         return Inertia::render('Dashboard', [
-            'notices' => $notices
+            'notices' => $notices,
         ]);
     }
 
 
     /**
-     * // TODO バリデーション
      * 周知事項 POST 保存ボタンから起動
      *
      * @param Request $request

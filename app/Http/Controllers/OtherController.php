@@ -4,15 +4,31 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SendMailRequest;
+use App\Mail\SendErrorMail;
 use App\Mail\SendReportMail;
 use App\Models\HorensoInfo;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 
 class OtherController extends Controller
 {
+
+    public function index()
+    {
+        try {
+            return Inertia::render('History', [
+                'recs' => array_reverse(User::find(Auth::id())->horensoInfos->toArray()),
+                'user' => User::select('id', 'name')->get()
+            ]);
+        } catch (\Exception $e) {
+            Mail::send(new SendErrorMail($e, 'index'));
+            return Inertia::render('Error');
+        }
+    }
+
     /**
      * @return member-list ページへ移動
      * @param 全メンバー情報
@@ -24,8 +40,9 @@ class OtherController extends Controller
             return Inertia::render('MemberList', [
                 'members' => $members
             ]);
-        } catch(\Exception) {
-            // TODO: catch処理
+        } catch(\Exception $e) {
+            Mail::send(new SendErrorMail($e, 'member_list'));
+            return Inertia::render('Error');
         }
     }
 
@@ -36,16 +53,16 @@ class OtherController extends Controller
     public function horenso($id)
     {
         try {
-            return Inertia::render('Horenso', [
+            return Inertia::render('Horenso/Horenso', [
                 'id' => $id
             ]);
-        } catch(\Exception) {
-            // TODO: catch処理
+        } catch(\Exception $e) {
+            Mail::send(new SendErrorMail($e, 'horenso'));
+            return Inertia::render('Error');
         }
     }
 
     /**
-     * // TODO:別のコントローラへうつす
      * @return myPage へ戻る（フラッシュメッセージつき）
      */
     public function sendMail(SendMailRequest $request)
@@ -56,7 +73,7 @@ class OtherController extends Controller
                 'target_user_id' => $request->target_user_id,
                 'is_question' => $request->is_question,
                 'title' => $request->title,
-                'request' => $request->requests,
+                'request_for' => $request->request_for,
                 'detail' => $request->detail,
                 'cause' => $request->cause,
                 'other' => $request->other,
@@ -65,15 +82,28 @@ class OtherController extends Controller
 
             Mail::send(new SendReportMail($request));
 
-            return to_route('MyPage.index', [
-                'user' => Auth::user()->select('id', 'name')->get(),
-                'rec' => Auth::user()->myPageInfos
-            ])->with([
-                'message' => 'メールを送信しました。'
-            ]);
+            // リレンダーをやりすぎると、フラッシュメッセージが使えなくなるから仕方なくクエリして条件分岐する。
 
-        } catch (\Exception) {
-            // TODO: エラー処理
+            // マイページのレコード有り
+            if(User::find($request->user_id)->myPageInfos->count() > 0) {
+
+                return to_route('MyPage.show', [
+                    'MyPage' => Auth::id()
+                ])->with([
+                    'message' => 'メールを送信しました。'
+                ]);
+
+            // マイページのレコード無し
+            } else {
+                return to_route('MyPage.create')->with([
+                    'message' => 'メールを送信しました。'
+                ]);
+            }
+
+
+        } catch (\Exception $e) {
+            Mail::send(new SendErrorMail($e, 'sendMail'));
+            return Inertia::render('Error');
         }
 
     }
