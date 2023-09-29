@@ -22,9 +22,10 @@ class MyPageInfoRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'user_id' => ['required', 'numeric'],
             'task_content' => ['required', 'string'],
             'task_start' => ['required', 'date'],
-            'task_end' => ['required', 'date'],
+            'task_end' => ['nullable', 'date'],
             'schedule_status' => ['required', 'numeric'],
             'available_start' => ['required'],
             'available_end' => ['required'],
