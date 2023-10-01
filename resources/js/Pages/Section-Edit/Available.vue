@@ -23,6 +23,8 @@ onMounted(() => {
 
     // available end の入力欄の編集不可を外す
     let start = input.target.value
+    // available_end >= available_start + 1分とする。
+    start = start.slice(0, 4) + Number(start.slice(-1)) + 1
     if(document.getElementsByName('available_end_time')[0].readOnly) {
       document.getElementsByName('available_end_time')[0].readOnly == false
     }
@@ -41,7 +43,7 @@ onMounted(() => {
 
 <template>
     <div class="flex flex-col w-3/5 mx-auto">
-      <h1 class="text-md font-medium mb-4 text-gray-900 mt-10">都合がいい時間はありますか？</h1>
+      <h1 class="required text-md font-medium mb-4 text-gray-900 mt-10">都合がいい時間はありますか？</h1>
 
       <!-- バリデーションエラー表示 -->
       <div class="flex">
@@ -90,12 +92,21 @@ onMounted(() => {
         </div>
       </div>
 
-      <h1 class="text-md font-medium mb-4 text-gray-900 mt-10">質問するときの注意事項</h1>
-      <div v-if="props.errors.caution" class="text-red-600">{{ props.errors.available_start }}</div>
+      <h1 class="required text-md font-medium mb-4 text-gray-900 mt-10">質問するときの注意事項</h1>
+      <div v-if="props.errors.caution" class="text-red-600">{{ props.errors.caution }}</div>
       <textarea
         name="caution"
         v-model="props.form.caution"
-        class="bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">
+        class="break-words whitespace-pre-wrap bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 h-32 text-base outline-none text-gray-700 py-1 px-3 resize-none leading-6 transition-colors duration-200 ease-in-out">
       </textarea>
     </div>
 </template>
+
+
+<style>
+    .required::after {
+        content: " *";
+        color: red;
+        vertical-align: middle;
+    }
+</style>

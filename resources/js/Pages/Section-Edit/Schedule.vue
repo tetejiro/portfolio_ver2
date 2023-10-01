@@ -12,6 +12,7 @@ defineEmits(['change'])
 
 <template>
   <div>
+    <h1 class="required text-md font-medium mb-4 text-gray-900 mt-10 text-center">順調ですか？</h1>
     <div v-if="props.errors.schedule_status" class="text-red-600 text-center my-3">{{ props.errors.schedule_status }}</div>
     <div class="flex mt-4 mb-8 w-3/5 mx-auto">
       <label class="mx-auto">
