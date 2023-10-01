@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MyPageController;
 use App\Http\Controllers\NoticeInfoController;
+use App\Http\Controllers\OtherController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
@@ -17,19 +18,32 @@ Route::get('/', function () {
     ]);
 });
 
-Route::get('/dashboard', [NoticeInfoController::class, 'index'])->middleware(['auth', 'verified', 'noticeInfo'])->name('dashboard');
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-
-Route::get('/myPage/{id?}', [MyPageController::class, 'index'])->middleware(['auth', 'verified'])->name('my_page');
-Route::post('/myPage', [MyPageController::class, 'store'])->middleware(['auth', 'verified'])->name('post_my_page');
-Route::get('/member_list', [MyPageController::class, 'member_list'])->middleware(['auth', 'verified'])->name('member_list');
-Route::get('/horenso/{id}', [MyPageController::class, 'horenso'])->middleware(['auth', 'verified'])->name('horenso');
-Route::post('/sendMail', [MyPageController::class, 'sendMail'])->middleware(['auth', 'verified'])->name('sendMail');
-
 require __DIR__.'/auth.php';
+
+
+
+// ログイン後ページ
+Route::resource('/dashboard', NoticeInfoController::class)
+->middleware(['auth', 'verified', 'noticeInfo'])
+->only(['index', 'store']);
+
+// MyPage
+Route::resource('/MyPage', MyPageController::class)->middleware(['auth', 'verified']);
+
+
+// その他のページ
+
+// 報連相履歴
+Route::get('/History', [OtherController::class, 'index'])->middleware(['auth', 'verified'])->name('history');
+// メンバーリスト
+Route::get('/Member-list', [OtherController::class, 'member_list'])->middleware(['auth', 'verified'])->name('member_list');
+// 報連相：送信フォーム
+Route::get('/horenso/{id}', [OtherController::class, 'horenso'])->middleware(['auth', 'verified'])->name('horenso');
+// 報連相：送信・保存
+Route::post('/sendMail', [OtherController::class, 'sendMail'])->middleware(['auth', 'verified'])->name('sendMail');
