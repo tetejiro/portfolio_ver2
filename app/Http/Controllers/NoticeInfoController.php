@@ -9,23 +9,24 @@ use Inertia\Inertia;
 
 class NoticeInfoController extends Controller
 {
+
+    /**
+     * 周知事項への画面遷移前に周知事項レコードを取得する
+     */
     public function __construct()
     {
         $this->middleware('noticeInfo');
     }
 
     /**
-     * 周知事項 GET ログイン後起動
+     * 周知事項への画面遷移
      *
      * @param Request $request
      * @return void
      */
     public function index(Request $request)
     {
-        \Log::debug('index');
-
-        $notices = $request->notices;
-        $notices = array_reverse($notices->toArray());
+        $notices = array_reverse($request->notices->toArray());
 
         return Inertia::render('Dashboard', [
             'notices' => $notices,
@@ -34,13 +35,14 @@ class NoticeInfoController extends Controller
 
 
     /**
-     * 周知事項 POST 保存ボタンから起動
+     * 周知事項保存 → 周知事項への画面遷移
      *
-     * @param Request $request
+     * @param Request $request インサートする周知事項レコード
      * @return void
      */
     public function store(Request $request)
     {
+        // バリデーション
         $request->validate([
             'content' => 'required|string|max:255'
         ]);
@@ -49,7 +51,6 @@ class NoticeInfoController extends Controller
             Notice::create([
                 'content' => $request->content
             ]);
-
             $message = '登録しました。';
             $status = 'OK';
         } catch(\Exception $e) {
@@ -57,6 +58,7 @@ class NoticeInfoController extends Controller
             $status = 'NG';
         }
 
+        // 周知事項画面へリダイレクト
         return to_route('dashboard.index')
         ->with([
             'message' => $message,

@@ -11,6 +11,8 @@ use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
 
+
+// 報連相を送るメール
 class SendReportMail extends Mailable
 {
     use Queueable, SerializesModels;

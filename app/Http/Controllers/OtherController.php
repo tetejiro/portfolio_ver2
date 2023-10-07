@@ -16,6 +16,11 @@ use Inertia\Inertia;
 class OtherController extends Controller
 {
 
+    /**
+     * 履歴画面へ遷移（自分の報連相を表示する）
+     *
+     * @return void
+     */
     public function index()
     {
         try {
@@ -29,10 +34,12 @@ class OtherController extends Controller
         }
     }
 
+
     /**
-     * @return member-list ページへ移動
-     * @param 全メンバー情報
-    */
+     * メンバーリストへ画面遷移
+     *
+     * @return void
+     */
     public function member_list()
     {
         try {
@@ -46,9 +53,12 @@ class OtherController extends Controller
         }
     }
 
+
     /**
-     * @return 報連相ページへ移動
-     * @param 報連相相手のid
+     * 報連相ページへ遷移
+     *
+     * @param int $id 自分のユーザID
+     * @return void
      */
     public function horenso($id)
     {
@@ -63,7 +73,10 @@ class OtherController extends Controller
     }
 
     /**
-     * @return myPage へ戻る（フラッシュメッセージつき）
+     * Horenso テーブルにレコードをインサート後、メール送信（報告・質問）
+     *
+     * @param SendMailRequest $request メールの内容
+     * @return void
      */
     public function sendMail(SendMailRequest $request)
     {
@@ -82,9 +95,9 @@ class OtherController extends Controller
 
             Mail::send(new SendReportMail($request));
 
-            // リレンダーをやりすぎると、フラッシュメッセージが使えなくなるから仕方なくクエリして条件分岐する。
+            // リレンダーをやりすぎると、フラッシュメッセージが使えなくなるからクエリして条件分岐する。
 
-            // マイページのレコード有り
+            // マイページのレコード有り（マイページ：表示用へ遷移）
             if(User::find($request->user_id)->myPageInfos->count() > 0) {
 
                 return to_route('MyPage.show', [
@@ -93,19 +106,15 @@ class OtherController extends Controller
                     'message' => 'メールを送信しました。'
                 ]);
 
-            // マイページのレコード無し
+            // マイページのレコード無し（マイページ：レコード新規作成用へ遷移）
             } else {
                 return to_route('MyPage.create')->with([
                     'message' => 'メールを送信しました。'
                 ]);
             }
-
-
         } catch (\Exception $e) {
             Mail::send(new SendErrorMail($e, 'sendMail'));
             return Inertia::render('Error');
         }
-
     }
-
 }

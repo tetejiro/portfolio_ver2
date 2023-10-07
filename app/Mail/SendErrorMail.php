@@ -9,6 +9,8 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
+
+// エラー内容メール送信処理
 class SendErrorMail extends Mailable
 {
     use Queueable, SerializesModels;

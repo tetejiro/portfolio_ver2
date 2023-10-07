@@ -11,18 +11,16 @@ use Inertia\Inertia;
 use App\Models\User;
 use Illuminate\Support\Facades\Mail;
 
-// use Illuminate\Support\Facades\Mail;
-
 class MyPageController extends Controller
 {
 
     /**
-     * @return マイページへ移動 GET タブメニューから起動
-     * @param ユーザに紐づく MyPageInfo レコード
-    */
+     * マイページへの画面遷移
+     *
+     * @return void
+     */
     public static function index()
     {
-        \Log::debug('index');
         try {
             $rec = array_reverse(Auth::user()->myPageInfos->toArray());
 
@@ -53,8 +51,6 @@ class MyPageController extends Controller
      */
     public function create()
     {
-        \Log::debug('create');
-
         try{
             return Inertia::render('MyPage/CreateMyPage', [
                 'user' => User::select('id', 'name')->where('id', Auth::id())->get(),
@@ -68,13 +64,13 @@ class MyPageController extends Controller
 
 
     /**
-     * MyPageInfo レコードの保存
-     * @param マイページの View
-    */
+     * マイページのレコード保存
+     *
+     * @param MyPageInfoRequest $request マイページのレコード
+     * @return void
+     */
     public function store(MyPageInfoRequest $request)
     {
-        \Log::debug('store');
-
         try {
             MypageInfo::create([
                 'user_id' => $request->user_id,
@@ -104,11 +100,14 @@ class MyPageController extends Controller
     }
 
 
-    // メンバーリストから MyPage
+    /**
+     * メンバーリストからマイページへの画面遷移
+     *
+     * @param int $id ユーザID
+     * @return void
+     */
     public function show($id)
     {
-        \Log::debug('show');
-
         try {
             $rec = array_reverse(MypageInfo::where('user_id', $id)->get()->toArray());
 
@@ -127,14 +126,17 @@ class MyPageController extends Controller
             Mail::send(new SendErrorMail($e, 'show'));
             return Inertia::render('Error');
         }
-
     }
 
 
+    /**
+     * マイページから編集画面へ画面遷移
+     *
+     * @param int $id マイページのレコードID
+     * @return void
+     */
     public function edit($id)
     {
-        \Log::debug('edit');
-
         try {
             return Inertia::render('MyPage/EditMyPage', [
                 'user' => User::select('id', 'name')->where('id', Auth::id())->get(),
@@ -147,9 +149,14 @@ class MyPageController extends Controller
     }
 
 
+    /**
+     * マイページ更新
+     *
+     * @param MyPageInfoRequest $request マイページの更新レコード
+     * @return void
+     */
     public function update(MyPageInfoRequest $request)
     {
-        \Log::debug('update');
         try {
             MypageInfo::where('id', $request->rec_id)
             ->update([
@@ -179,9 +186,14 @@ class MyPageController extends Controller
     }
 
 
+    /**
+     * マイページレコード削除
+     *
+     * @param int $id 削除対象のマイページレコードのID
+     * @return void
+     */
     public function destroy($id)
     {
-        \Log::debug('destroy');
         try {
             MypageInfo::where('id', $id)->delete();
 
