@@ -1,7 +1,10 @@
 <script setup>
 import { Head, Link } from '@inertiajs/vue3';
+import { shallowRef } from 'vue';
 import Login from './Auth/Login.vue';
 import Register from './Auth/Register.vue';
+
+const current = shallowRef(Login)
 
 defineProps({
     canLogin: {
@@ -24,46 +27,22 @@ defineProps({
 <template>
     <Head title="Welcome" />
 
+
     <div
         class="relative sm:flex sm:justify-center sm:items-center min-h-screen bg-dots-darker bg-center bg-gray-100 dark:bg-dots-lighter dark:bg-gray-900 selection:bg-red-500 selection:text-white"
     >
-        <div v-if="canLogin" class="sm:fixed sm:top-0 sm:right-0 p-6 text-right">
-            <Link
-                v-if="$page.props.auth.user"
-                :href="route('dashboard')"
-                class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                >Dashboard</Link
-            >
 
-            <template v-else>
-                <Link
-                    :href="route('login')"
-                    class="font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                    >ログイン</Link
-                >
-
-                <Link
-                    v-if="canRegister"
-                    :href="route('register')"
-                    class="ml-4 font-semibold text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-white focus:outline focus:outline-2 focus:rounded-sm focus:outline-red-500"
-                    >登録</Link
-                >
-            </template>
+        <!-- ヘッダー -->
+        <div class="flex justify-center space-x-10 w-full sm:fixed sm:top-0 sm:right-0 p-6">
+            <label class="block font-medium text-base text-gray-700"><input type="radio" v-model="current" :value="Register" class="mr-2"/>登録</label>
+            <label class="block font-medium text-base text-gray-700"><input type="radio" v-model="current" :value="Login" class="mr-2"/>ログイン</label>
         </div>
+        <!-- ヘッダー -->
 
         <div class="w-full">
-
-
-
-            <!-- ここから -->
-            <div class="flex w-full justify-evenly">
-                <Register class="w-1/3 p-3"></Register>
-                <login class="w-1/3 p-3"></login>
-            </div>
-            <!-- ここまで -->
-
-
-
+            <KeepAlive>
+                <component :is="current"/>
+            </KeepAlive>
         </div>
     </div>
 </template>
