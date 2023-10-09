@@ -48,7 +48,7 @@ let props = defineProps(['recs', 'user']);
                             <td class="w-9/12 border-solid border border-gray-200 px-4 py-3">質問</td>
                           </tr>
                           <tr>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl">相手</th>
+                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl">質問 相手</th>
                               <div v-for="user in props.user" :key="user" class="w-full h-full">
                                 <div v-if="rec.target_user_id == user.id" class="w-full h-full border-solid border-r border-l border-gray-200 px-4 py-3">
                                   {{ user.name }}
@@ -86,7 +86,7 @@ let props = defineProps(['recs', 'user']);
                             <td class="w-9/12 border-solid border border-gray-200 px-4 py-3">報告・連絡・相談</td>
                           </tr>
                           <tr>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl">相手</th>
+                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl">報連相 相手</th>
                               <div v-for="user in props.user" :key="user" class="w-full h-full">
                                 <div v-if="rec.target_user_id == user.id" class="w-full h-full border-solid border-r border-l border-gray-200 px-4 py-3">
                                   {{ user.name }}

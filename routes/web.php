@@ -9,15 +9,6 @@ use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
 
-Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
-
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
@@ -27,6 +18,15 @@ Route::middleware('auth')->group(function () {
 require __DIR__.'/auth.php';
 
 
+// ログイン・登録ページ
+Route::get('/', function () {
+    return Inertia::render('Welcome', [
+        'canLogin' => Route::has('login'),
+        'canRegister' => Route::has('register'),
+        'laravelVersion' => Application::VERSION,
+        'phpVersion' => PHP_VERSION,
+    ]);
+});
 
 // ログイン後ページ
 Route::resource('/dashboard', NoticeInfoController::class)
@@ -35,7 +35,6 @@ Route::resource('/dashboard', NoticeInfoController::class)
 
 // MyPage
 Route::resource('/MyPage', MyPageController::class)->middleware(['auth', 'verified']);
-
 
 // その他のページ
 
