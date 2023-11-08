@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('notices', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->timestamp('created_at')->useCurrent()->nullable();
+            $table->timestamp('updated_at')->useCurrent()->nullable();
             $table->string('content')->nullable(false);
         });
     }
