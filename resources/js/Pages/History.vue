@@ -4,6 +4,9 @@ let props = defineProps(['recs', 'user']);
 </script>
 
 <template>
+
+  <Head title="History" />
+
   <AuthenticatedLayout>
 
     <!-- ヘッダー -->
@@ -33,7 +36,7 @@ let props = defineProps(['recs', 'user']);
 
                     <!-- ヘッダー -->
                     <div class="flex items-center justify-evenly text-center w-full mb-4">
-                      <h1 class="text-md font-medium text-gray-900 mt-10 w-auto">報連相の履歴</h1>
+                      <h1 class="text-md font-medium text-gray-900 mt-10 w-auto">質問・報連相の履歴</h1>
                     </div>
                     <!-- ヘッダー -->
 
@@ -48,7 +51,7 @@ let props = defineProps(['recs', 'user']);
                             <td class="w-9/12 border-solid border border-gray-200 px-4 py-3">質問</td>
                           </tr>
                           <tr>
-                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-tl">質問 相手</th>
+                            <th class="px-4 py-3 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">質問 相手</th>
                               <div v-for="user in props.user" :key="user" class="w-full h-full">
                                 <div v-if="rec.target_user_id == user.id" class="w-full h-full border-solid border-r border-l border-gray-200 px-4 py-3">
                                   {{ user.name }}

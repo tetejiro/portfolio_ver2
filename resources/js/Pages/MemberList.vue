@@ -9,6 +9,9 @@ let moveToMyPage = id => {
 }
 </script>
 <template>
+
+  <Head title="Members" />
+
   <AuthenticatedLayout>
 
     <!-- ヘッダー -->
