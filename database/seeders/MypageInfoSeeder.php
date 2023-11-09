@@ -4,16 +4,16 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\MypageInfo;
+use App\Models\MyPageInfo;
 
-class MypageInfoSeeder extends Seeder
+class MyPageInfoSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        MypageInfo::insert([
+        MyPageInfo::insert([
             [
                 'user_id' => 1,
                 'task_content' => '新規画面開発',

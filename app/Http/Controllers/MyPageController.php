@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MyPageInfoRequest;
 use App\Mail\SendErrorMail;
-use App\Models\MypageInfo;
+use App\Models\MyPageInfo;
 use Illuminate\Support\Facades\Auth;
 use Inertia\Inertia;
 use App\Models\User;
@@ -72,7 +72,7 @@ class MyPageController extends Controller
     public function store(MyPageInfoRequest $request)
     {
         try {
-            MypageInfo::create([
+            MyPageInfo::create([
                 'user_id' => $request->user_id,
                 'task_content' => $request->task_content,
                 'task_start' => $request->task_start,
@@ -109,7 +109,7 @@ class MyPageController extends Controller
     public function show($id)
     {
         try {
-            $rec = array_reverse(MypageInfo::where('user_id', $id)->get()->toArray());
+            $rec = array_reverse(MyPageInfo::where('user_id', $id)->get()->toArray());
 
             // 自分のページ かつ レコードなし
             if($id == Auth::id() && count($rec) == 0) {
@@ -140,7 +140,7 @@ class MyPageController extends Controller
         try {
             return Inertia::render('MyPage/EditMyPage', [
                 'user' => User::select('id', 'name')->where('id', Auth::id())->get(),
-                'rec' => MypageInfo::where('id', $id)->get()
+                'rec' => MyPageInfo::where('id', $id)->get()
             ]);
         } catch (\Exception $e) {
             Mail::send(new SendErrorMail($e, 'edit'));
@@ -158,7 +158,7 @@ class MyPageController extends Controller
     public function update(MyPageInfoRequest $request)
     {
         try {
-            MypageInfo::where('id', $request->rec_id)
+            MyPageInfo::where('id', $request->rec_id)
             ->update([
                 'user_id' => $request->user_id,
                 'task_content' => $request->task_content,
@@ -195,7 +195,7 @@ class MyPageController extends Controller
     public function destroy($id)
     {
         try {
-            MypageInfo::where('id', $id)->delete();
+            MyPageInfo::where('id', $id)->delete();
 
             return to_route('MyPage.show', [
                 'MyPage' => Auth::id()

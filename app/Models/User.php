@@ -4,7 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use App\Models\MypageInfo;
+use App\Models\MyPageInfo;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -44,10 +44,10 @@ class User extends Authenticatable
      * リレーション定義
      */
 
-    // user : MypageInfo = 1 : 多 全レコード
+    // user : MyPageInfo = 1 : 多 全レコード
     public function myPageInfos()
     {
-        return $this->hasMany(MypageInfo::class);
+        return $this->hasMany(MyPageInfo::class);
     }
 
     // user : HorensoInfo = 1 : 多

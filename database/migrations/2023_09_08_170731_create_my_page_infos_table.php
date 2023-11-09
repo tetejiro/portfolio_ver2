@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('mypage_infos', function (Blueprint $table) {
+        Schema::create('my_page_infos', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->nullable(false);
             $table->string('task_content')->nullable(false);
@@ -33,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('mypage_infos');
+        Schema::dropIfExists('my_page_infos');
     }
 };

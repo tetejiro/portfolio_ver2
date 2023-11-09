@@ -62,7 +62,7 @@ let toDeleteAction = (id) => {
             <td class="px-4 py-3 border-solid border">{{ calcTimeGap(rec.task_start, rec.task_end) }}</td>
           </tr>
           <tr>
-            <th class="px-4 py-3 w-1/5 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100 rounded-bl">当時の気分</th>
+            <th class="px-4 py-3 w-1/5 title-font tracking-wider font-medium text-gray-900 text-sm bg-gray-100">当時の気分</th>
             <td class="px-4 py-3 border-solid border" v-if="rec.schedule_status == 1">手伝ってほしい</td>
             <td class="px-4 py-3 border-solid border" v-if="rec.schedule_status == 2">いそがしい</td>
             <td class="px-4 py-3 border-solid border" v-if="rec.schedule_status == 3">よゆうがない</td>
