@@ -28,7 +28,7 @@ class SendReportMail extends Mailable
     {
         $this->request = $request;
 
-        $user = DB::table('Users')->select('name')->where('id', $this->request->user_id)->get();
+        $user = DB::table('users')->select('name')->where('id', $this->request->user_id)->get();
         $this->user_name = $user[0]->name;
         $this->target_user = User::select('name', 'email')->where('id', $this->request->target_user_id)->get();
     }
