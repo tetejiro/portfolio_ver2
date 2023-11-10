@@ -62,8 +62,8 @@ class SendReportMail extends Mailable
             $path = 'emails.reportEmail';
         }
 
-        return $this->from('test@test.com', 'Example')
-                    ->view($path)
-                    ->to($this->target_user[0]['email'], $this->target_user[0]['name']);
+        return $this
+                ->view($path)
+                ->to($this->target_user[0]['email'], $this->target_user[0]['name']);
     }
 }

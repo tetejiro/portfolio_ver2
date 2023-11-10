@@ -39,7 +39,7 @@ class SendErrorMail extends Mailable
 
     public function build()
     {
-        return $this->from('test@test.com', 'Example')
+        return $this
                 ->view('emails.errorEmail')
                 ->to('higashiyuki5@gmail.com');
     }
