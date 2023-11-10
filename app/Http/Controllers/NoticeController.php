@@ -7,7 +7,7 @@ use App\Models\Notice;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
-class NoticeInfoController extends Controller
+class NoticeController extends Controller
 {
 
     /**

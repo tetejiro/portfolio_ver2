@@ -2,7 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MyPageController;
-use App\Http\Controllers\NoticeInfoController;
+use App\Http\Controllers\NoticeController;
 use App\Http\Controllers\OtherController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -29,7 +29,7 @@ Route::get('/', function () {
 });
 
 // ログイン後ページ
-Route::resource('/dashboard', NoticeInfoController::class)
+Route::resource('/dashboard', NoticeController::class)
 ->middleware(['auth', 'verified', 'noticeInfo'])
 ->only(['index', 'store']);
 

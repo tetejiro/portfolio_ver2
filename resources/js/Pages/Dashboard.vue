@@ -19,7 +19,7 @@ let submit = () => {
 </script>
 
 <template>
-    <Head title="Announce" />
+    <Head title="周知事項" />
 
     <AuthenticatedLayout>
         <template #header>
