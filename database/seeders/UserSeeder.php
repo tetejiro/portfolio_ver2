@@ -17,9 +17,9 @@ class UserSeeder extends Seeder
         DB::table('users')->insert([
             [
                 'year' => 1,
-                'name' => '東由樹2',
+                'name' => '東由樹',
                 'email' => 'tetemalu1gou@gmail.com',
-                'password' => Hash::make('test'),
+                'password' => Hash::make('test1'),
                 'email_verified_at' => date('Y-m-d H:i:s')
             ],
             // [
@@ -66,9 +66,9 @@ class UserSeeder extends Seeder
             // ],
             [
                 'year' => 6,
-                'name' => '東由樹',
+                'name' => '東由樹2',
                 'email' => 'hy1733505@gmail.com',
-                'password' => Hash::make('yuki'),
+                'password' => Hash::make('test2'),
                 'email_verified_at' => date('Y-m-d H:i:s')
             ],
         ]);

@@ -27,6 +27,7 @@ class RegistrationTest extends TestCase
         ]);
 
         $this->assertAuthenticated();
+        $this->assertDatabaseHas('users', ['name' => 'Test User']);
         $response->assertRedirect(RouteServiceProvider::HOME);
     }
 }

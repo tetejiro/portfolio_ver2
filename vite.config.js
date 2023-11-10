@@ -17,13 +17,4 @@ export default defineConfig({
             },
         }),
     ],
-    build: {
-        rollupOptions: {
-            output: { // entry chunk assets それぞれの書き出し名の指定
-                entryFileNames: `[name].js`,
-                chunkFileNames: `[name].js`,
-                assetFileNames: `[name].[ext]`,
-            },
-        },
-    },
 });
