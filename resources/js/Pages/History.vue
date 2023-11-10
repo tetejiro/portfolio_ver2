@@ -5,7 +5,7 @@ let props = defineProps(['recs', 'user']);
 
 <template>
 
-  <Head title="History" />
+  <Head title="履歴" />
 
   <AuthenticatedLayout>
 
