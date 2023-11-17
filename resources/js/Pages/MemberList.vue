@@ -46,14 +46,15 @@ let moveToMyPage = id => {
                 <!-- ユーザ -->
                 <div class="flex flex-col justify-center">
                   <div v-for="(everyYear, idx) in props.members" :key="everyYear">
-                    <div class="flex flex-wrap items-center">
-                      <div class="mb-3 text-center" v-if="idx != 6">{{ idx }} 期生</div>
-                      <div class="mb-3 text-center w-11" v-else>達人</div>
+                    <div class="flex">
+                      <div class="flex flex-col justify-center">
+                        <div class="mb-3 text-center" v-if="idx != 6">{{ idx }} 期生</div>
+                        <div class="mb-3 text-center" v-else>達人</div>
+                      </div>
                       <div v-for="user in everyYear" :key="user" class="m-2">
                         <div @click="moveToMyPage(user.id)">
                           <div>
                             <img alt="team" class="mx-auto w-16 h-16 bg-gray-100 object-cover object-center flex-shrink-0 rounded-full" src="https://dummyimage.com/80x80">
-                            <!-- <p class="text-gray-900 text-center">役職名</p> -->
                             <h2 class="text-center text-gray-700">{{ user.name }}</h2>
                           </div>
                         </div>

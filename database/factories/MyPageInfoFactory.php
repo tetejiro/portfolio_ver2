@@ -16,14 +16,14 @@ class MyPageInfoFactory extends Factory
      */
     public function definition(): array
     {
-	    $task_start = fake()->dateTimeBetween('-2 years', 'now'); //開始時間 
+	    $task_start = fake()->dateTimeBetween('-2 years', 'now'); //開始時間
 	    $plusMinute = '+'. (string)rand(0, 14400). ' minute'; //終了時間（ 開始時間にランダムな分数足している）
 	    $start_hour = rand(10, 18); // 空き時間（開始時間）H
 	    $end_hour = rand($start_hour + 1, 19); // 空き時間（終了時間）H
 	    $start_min = rand(0, 59); // 空き時間（開始時間）m
 	    $end_min = rand(0, 59); // 空き時間（終了時間）m
-	    $start_time = $start_hour.':'.str_pad($start_min, 2, 0, STR_PAD_LEFT);
-	    $end_time = $end_hour. ':'. str_pad($end_min, 2, 0, STR_PAD_LEFT);
+        $start_time = $start_hour.':'.str_pad($start_min, 2, 0, STR_PAD_LEFT);
+        $end_time = $end_hour. ':'. str_pad($end_min, 2, 0, STR_PAD_LEFT);
         $userNum = \App\Models\User::count();
 
         return [
