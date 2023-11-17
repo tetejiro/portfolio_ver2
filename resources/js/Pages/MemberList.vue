@@ -10,9 +10,8 @@ let moveToMyPage = id => {
 </script>
 <template>
 
-  <Head title="社員一覧" />
-
   <AuthenticatedLayout>
+    <Head title="社員一覧" />
 
     <!-- ヘッダー -->
     <template #header>

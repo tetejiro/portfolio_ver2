@@ -25,7 +25,7 @@ defineProps({
 </script>
 
 <template>
-    <Head title="Welcome" />
+    <Head title="ログイン" />
 
 
     <div

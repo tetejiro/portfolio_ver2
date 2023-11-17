@@ -96,9 +96,9 @@ let update = () => {
 </script>
 
 <template>
-    <Head title="MyPage" />
 
     <AuthenticatedLayout>
+        <Head title="マイページ" />
 
         <!-- ヘッダー -->
         <template #header>
