@@ -23,13 +23,13 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             UserSeeder::class,
-            // HorensoInfoSeeder::class,
-            // MyPageInfoSeeder::class,
+            HorensoInfoSeeder::class,
+            MyPageInfoSeeder::class,
             NoticeSeeder::class,
             ScheduleStatus::class
         ]);
 
-        User::factory(35)->create();
+        User::factory(40)->create();
         MyPageInfo::factory(60)->create();
         HorensoInfo::factory(60)->create();
     }

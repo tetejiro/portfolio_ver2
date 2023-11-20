@@ -23,7 +23,7 @@ class HorensoInfoFactory extends Factory
         $rsvp = $is_question ? fake()->numberBetween(1, 2) : null;
 
         return [
-            'user_id' => fake()->numberBetween(1, $userNum),
+            'user_id' => fake()->numberBetween(2, $userNum),
             'target_user_id' => fake()->numberBetween(1, $userNum),
             'is_question' => $is_question,
             'title' => fake()->realText(),

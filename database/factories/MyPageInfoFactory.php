@@ -27,7 +27,7 @@ class MyPageInfoFactory extends Factory
         $userNum = \App\Models\User::count();
 
         return [
-            'user_id' => fake()->numberBetween(1, $userNum),
+            'user_id' => fake()->numberBetween(2, $userNum),
             'task_content' => fake()->realText(255, 5),
             'task_start' => $task_start->format('Y-m-d H:i'),
             'task_end' => $task_start->modify($plusMinute)->format('Y-m-d H:i'),
