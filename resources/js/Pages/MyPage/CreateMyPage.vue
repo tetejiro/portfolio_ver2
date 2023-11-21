@@ -9,7 +9,7 @@ import Record from '@/Pages/Section-Edit/Record.vue';
 import { Head, router } from '@inertiajs/vue3';
 import { ref, reactive } from 'vue'
 
-console.log('CreateMyPage.vue');
+
 /**
  * タブメニューのアクティブ・非アクティブの切り替え
  */
@@ -79,9 +79,9 @@ let submit = () => {
 </script>
 
 <template>
-    <Head title="MyPage" />
 
     <AuthenticatedLayout>
+        <Head title="マイページ" />
 
         <!-- ヘッダー -->
         <template #header>

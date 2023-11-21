@@ -24,7 +24,7 @@ const submit = () => {
 <template>
     <div>
         <GuestLayout>
-            <Head title="Register" />
+            <Head title="登録" />
 
             <form @submit.prevent="submit">
                 <div class="mt-4">
