@@ -6,21 +6,20 @@ use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
 
-class HistoryTest extends TestCase
+class MembersTest extends TestCase
 {
-
     /**
-     * 質問・報連相履歴への画面遷移
+     * 社員一覧への画面遷移
      */
     use RefreshDatabase;
 
-    public function test_質問・報連相履歴ページ表示(): void
+    public function test_社員一覧ページ表示(): void
     {
         $user = User::factory()->create();
 
         $response = $this
             ->actingAs($user)
-            ->get('History');
+            ->get('Member-list');
 
         $response->assertStatus(200);
     }
